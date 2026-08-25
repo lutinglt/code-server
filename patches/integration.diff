@@ -172,7 +172,7 @@ Index: code-server/lib/vscode/src/vs/workbench/browser/web.main.ts
  import { IProgressService } from '../../platform/progress/common/progress.js';
  import { DelayedLogChannel } from '../services/output/common/delayedLogChannel.js';
  import { dirname, joinPath } from '../../base/common/resources.js';
-@@ -139,6 +140,9 @@ export class BrowserMain extends Disposa
+@@ -140,6 +141,9 @@ export class BrowserMain extends Disposa
  		// Startup
  		const instantiationService = workbench.startup();
 
@@ -251,7 +251,7 @@ Index: code-server/lib/vscode/src/vs/server/node/webClientServer.ts
 ===================================================================
 --- code-server.orig/lib/vscode/src/vs/server/node/webClientServer.ts
 +++ code-server/lib/vscode/src/vs/server/node/webClientServer.ts
-@@ -353,6 +353,7 @@ export class WebClientServer {
+@@ -350,6 +350,7 @@ export class WebClientServer {
  		} : undefined;
 
  		const productConfiguration: Partial<Mutable<IProductConfiguration>> = {
@@ -279,7 +279,7 @@ Index: code-server/lib/vscode/src/server-main.ts
  } else {
 -	installServerProcessExitDiagnostics();
 +	installServerProcessExitDiagnostics(parsedArgs);
- 
+
  	let _remoteExtensionHostAgentServer: IServerAPI | null = null;
  	let _remoteExtensionHostAgentServerPromise: Promise<IServerAPI> | null = null;
 @@ -153,6 +156,7 @@ if (shouldSpawnCli) {
