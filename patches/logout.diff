@@ -28,8 +28,6 @@ Index: code-server/lib/vscode/src/vs/server/node/serverEnvironmentService.ts
 
  	/* ----- server setup ----- */
 
-@@ -112,6 +113,7 @@ export const serverOptions: OptionDescri
-
 @@ -128,6 +129,7 @@ export const serverOptions: OptionDescri
  export interface ServerParsedArgs {
  	/* ----- code-server ----- */
@@ -101,7 +99,7 @@ Index: code-server/lib/vscode/src/vs/workbench/browser/client.ts
 +			MenuRegistry.appendMenuItem(menuId, {
 +				command: {
 +					id: CodeServerClient.LOGOUT_COMMAND_ID,
-+					title: localize('logout', "退出", 'code-server'),
++					title: localize('logout', "Sign out of {0}", 'code-server'),
 +				},
 +			});
 +		}
