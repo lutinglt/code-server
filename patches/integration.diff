@@ -29,10 +29,6 @@ Index: code-server/lib/vscode/src/vs/server/node/server.main.ts
  };
 
 -const args = parseArgs(process.argv.slice(2), serverOptions, errorReporter);
-+function parse(): ServerParsedArgs {
-+	return parseArgs(process.argv.slice(2), serverOptions, errorReporter);
-+}
-
 -const agentHostBridgeConnectionToken = process.env[agentHostBridgeConnectionTokenEnvironmentVariable];
 -delete process.env[agentHostBridgeConnectionTokenEnvironmentVariable];
 -
@@ -218,9 +214,6 @@ Index: code-server/lib/vscode/src/vs/code/browser/workbench/workbench-dev.html
 
  		<!-- Disable pinch zooming -->
  		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-@@ -26,8 +27,9 @@
- 		<meta id="vscode-workbench-builtin-extensions" data-settings="{{WORKBENCH_BUILTIN_EXTENSIONS}}">
-
 @@ -28,8 +29,9 @@
  		<meta id="vscode-workbench-css-modules" data-settings="{{WORKBENCH_DEV_CSS_MODULES}}">
 
