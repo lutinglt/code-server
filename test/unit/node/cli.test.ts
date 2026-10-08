@@ -268,6 +268,16 @@ describe("parser", () => {
     expect(() => parse(["--log", "invalid"])).toThrowError(/--log valid values: \[trace, debug, info, warn, error\]/)
   })
 
+  it("should error if idle-timeout-seconds is too low", () => {
+    expect(() => parse(["--idle-timeout-seconds=60"])).toThrowError(
+      /--idle-timeout-seconds must be greater than 60 seconds/,
+    )
+    expect(() => parse(["--idle-timeout-seconds", "60"])).toThrowError(
+      /--idle-timeout-seconds must be greater than 60 seconds/,
+    )
+    expect(parse(["--idle-timeout-seconds", "61"])).toEqual({ "idle-timeout-seconds": 61 })
+  })
+
   it("should error if the option doesn't exist", () => {
     expect(() => parse(["--foo"])).toThrowError(/Unknown option --foo/)
   })
@@ -1054,6 +1064,13 @@ describe("toCodeArgs", () => {
       "enable-sandbox": true,
       agents: true,
       "enable-smoke-test-driver": false,
+    })
+  })
+
+  it("should pass through --enable-remote-storage", async () => {
+    expect(await toCodeArgs(await setDefaults(parse(["--enable-remote-storage"])))).toStrictEqual({
+      ...vscodeDefaults,
+      "enable-remote-storage": true,
     })
   })
 

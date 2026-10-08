@@ -47,6 +47,7 @@ export interface UserProvidedCodeArgs {
   "show-versions"?: boolean
   category?: string
   "github-auth"?: string
+  "enable-remote-storage"?: boolean
   "disable-update-check"?: boolean
   "disable-file-downloads"?: boolean
   "disable-file-uploads"?: boolean
@@ -275,6 +276,10 @@ export const options: Options<Required<UserProvidedArgs>> = {
     type: "string",
     description: "GitHub authentication token (can only be passed in via $GITHUB_TOKEN or the config file).",
   },
+  "enable-remote-storage": {
+    type: "boolean",
+    description: "Persist VS Code workbench storage on the remote server instead of browser storage.",
+  },
   "proxy-domain": { type: "string[]", description: "Domain used for proxying ports." },
   "skip-auth-preflight": {
     type: "boolean",
@@ -429,10 +434,6 @@ export const parse = (
         throw new Error("--github-auth can only be set in the config file or passed in via $GITHUB_TOKEN")
       }
 
-      if (key === "idle-timeout-seconds" && Number(value) <= 60) {
-        throw new Error("--idle-timeout-seconds must be greater than 60 seconds.")
-      }
-
       const option = options[key]
       if (option.type === "boolean") {
         ;(args[key] as boolean) = true
@@ -450,6 +451,10 @@ export const parse = (
         continue
       } else if (!value) {
         throw error(`--${key} requires a value`)
+      }
+
+      if (key === "idle-timeout-seconds" && Number(value) <= 60) {
+        throw new Error("--idle-timeout-seconds must be greater than 60 seconds.")
       }
 
       if (option.type === OptionalString && value === "false") {
