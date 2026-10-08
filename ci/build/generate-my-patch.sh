@@ -34,9 +34,11 @@ while IFS= read -r patch; do
 done < patches/series
 
 echo "=== Verifying target file ==="
-if ! grep -q 'callbackRoute: callbackRoute$' "$TARGET"; then
-  echo "ERROR: Cannot find 'callbackRoute: callbackRoute' in $TARGET"
+if ! grep -q 'callbackRoute: callbackRoute,$' "$TARGET"; then
+  echo "ERROR: Cannot find 'callbackRoute: callbackRoute,' in $TARGET"
   echo "The target pattern may have changed. Please update this script."
+  echo "--- context ---"
+  grep -n -C 3 'callbackRoute' "$TARGET" || true
   exit 1
 fi
 
@@ -52,7 +54,7 @@ import sys
 with open('$TARGET', 'r') as f:
     content = f.read()
 
-old = '			callbackRoute: callbackRoute\n'
+old = '\t\t\tcallbackRoute: callbackRoute,\n'
 new = '''			callbackRoute: callbackRoute,
 			windowIndicator: process.env.MY_APP_CS_REMOTE_NAME ? {
 				label: \`\$(remote) \${process.env.MY_APP_CS_REMOTE_NAME}\`,

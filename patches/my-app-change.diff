@@ -10,16 +10,14 @@ Index: code-server/lib/vscode/src/vs/server/node/webClientServer.ts
 ===================================================================
 --- code-server.orig/lib/vscode/src/vs/server/node/webClientServer.ts
 +++ code-server/lib/vscode/src/vs/server/node/webClientServer.ts
-@@ -451,7 +451,11 @@ export class WebClientServer {
- 			folderUri: resolveWorkspaceURI(this._environmentService.args['default-folder']),
+@@ -452,6 +452,10 @@ export class WebClientServer {
  			workspaceUri: resolveWorkspaceURI(this._environmentService.args['default-workspace']),
  			productConfiguration,
--			callbackRoute: callbackRoute
-+			callbackRoute: callbackRoute,
+ 			callbackRoute: callbackRoute,
 +			windowIndicator: process.env.MY_APP_CS_REMOTE_NAME ? {
 +				label: `$(remote) ${process.env.MY_APP_CS_REMOTE_NAME}`,
 +				tooltip: process.env.MY_APP_CS_REMOTE_NAME
 +			} : undefined,
+ 			remoteStorageEnabled: this._environmentService.args['enable-remote-storage'] ? true : undefined
  		};
  
- 		const cookies = cookie.parse(req.headers.cookie || '');
