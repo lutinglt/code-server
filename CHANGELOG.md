@@ -22,6 +22,38 @@ Code v99.99.999
 
 ## Unreleased
 
+## [4.145.2](https://github.com/coder/code-server/releases/tag/v4.145.2) - 2026-11-07
+
+Code v1.145.2
+
+### Changed
+
+- Update to Code 1.145.2
+
+## [4.145.0](https://github.com/coder/code-server/releases/tag/v4.145.0) - 2026-11-04
+
+Code v1.145.0
+
+### Security
+
+- Strip code-server's cookie from web socket requests going over the built-in
+  proxy. We were already doing this for regular proxied HTTP requests, but not
+  for proxied web sockets.
+- Add HttpOnly to cookies to prevent them from being accessed by JavaScript
+  proxied over the built-in proxy.
+
+### Changed
+
+- Update to Code 1.145.0
+
+### Added
+
+- Vietnamese locale.
+- New flag `--disable-file-cache` that keeps workspace files out of the browser
+  cache. It stops the webview service worker from storing them in Cache Storage
+  and serves them from `/vscode-remote-resource` with `Cache-Control: no-store`.
+  Extension files will still be cached.
+
 ## [4.144.0](https://github.com/coder/code-server/releases/tag/v4.144.0) - 2026-10-29
 
 Code v1.144.0
